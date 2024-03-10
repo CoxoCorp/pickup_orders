@@ -1,0 +1,1 @@
+export type ButtonsType = 'telegram' | 'vk' | 'voice' | 'sms';

@@ -1,0 +1,24 @@
+.ErrorBlock {
+  transform: scale(0.2);
+  transition: all 0.5s;
+  margin-top: 10px;
+  .title {
+    color: #E2292BFF;
+    font-weight: bold;
+    margin: 5px 0;
+    text-align: right;
+  }
+  div {
+    margin: 5px 0;
+    text-align: right;
+    color: #E2292BFF;
+  }
+  .link a {
+    text-decoration: underline;
+  }
+}
+
+.ErrorBlock.visible {
+  transform: scale(1);
+  transition: all 0.5s;
+}

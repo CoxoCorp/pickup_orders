@@ -1,0 +1,1 @@
+export type {workerType} from "./type/workerType.ts"

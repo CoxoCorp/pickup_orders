@@ -1,0 +1,39 @@
+.itemsBlock {
+  .title {
+    margin: 10px 0 10px 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2e7d32;
+  }
+  .oneItem {
+    margin-top: 15px;
+    .itemValue {
+      display: flex;
+      .itemNumber {
+        margin-right: 12px;
+        border-radius: 50%;
+        border: solid .5px #2e7d32;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .info {
+        flex: 1;
+        .itemTitle {
+          font-weight: bold;
+        }
+        .oneInfo {
+          display: flex;
+          .field {
+            font-weight: 500;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
