@@ -1,8 +1,8 @@
 <?php
 if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
     $allow_domens=[
-        "http://localhost:5173",
-        "http://localhost:5173/",
+        "http://localhost:5174",
+        "http://localhost:5174/",
         "https://coxo.ru",
     ];
     if ($_SERVER['HTTP_ORIGIN']) {

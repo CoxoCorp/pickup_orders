@@ -38,7 +38,7 @@ function App() {
   if (!worker) return <AuthForm setWorker={setWorker}/>
   if (order) return <CheckForm order={order} cancelFun={()=>setOrder(undefined)}/>
   return (
-      <WorkTable setOrder={setOrder}/>
+      <WorkTable setOrder={setOrder} logout={()=>setWorker(undefined)}/>
   )
 }
 

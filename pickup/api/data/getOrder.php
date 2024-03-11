@@ -9,7 +9,7 @@ $chatId=false;
 if ($data->success===1) {
     if (isset($data->data->shipments[0]->customer->phone)) {
         //$data->data->shipments[0]->customer->phone='79062302755';
-        $data->data->shipments[0]->customer->phone='79622666654';
+        //$data->data->shipments[0]->customer->phone='79622666654';
         require($_SERVER["DOCUMENT_ROOT"] ."/customClasses/TelegramUser.php");
         require($_SERVER["DOCUMENT_ROOT"] ."/customClasses/CustomUser.php");
         $phone=CustomUser::GetPhone($data->data->shipments[0]->customer->phone);

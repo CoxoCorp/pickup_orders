@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-Bitrix\Main\Loader::includeModule("coxo.loyalty");
+Bitrix\Main\Loader::includeModule("coxo.pickup");
 
 
 //Добавить столбец
@@ -15,9 +15,9 @@ Bitrix\Main\Loader::includeModule("coxo.loyalty");
 
 
 $arMigrate=[
-'ALTER TABLE '.
-Coxo\Loyalty\ItemTable::getTableName().
-' ADD COLUMN TITLE VARCHAR(255)'
+    'ALTER TABLE '.
+    Coxo\Pickup\ShipmentTable::getTableName().
+    ' ADD ERRORS_REPORTED VARCHAR(1)',
 ];
 
 $connection = Bitrix\Main\Application::getConnection();

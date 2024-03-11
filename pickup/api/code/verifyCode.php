@@ -16,6 +16,16 @@ function verifyCode($phone, $dealId, $code): array
     ];
     $currentCode=Messenger\Api::getCode($codeFields);
     if ($currentCode===$code)  {
+        Bitrix\Main\Loader::includeModule("coxo.pickup");
+        $shipment=Coxo\Pickup\ShipmentTable::getList(
+            [
+                'filter'=>['SHIPMENT_ID'=>$dealId]
+            ]
+        )->fetchObject();
+        if ($shipment) {
+            $shipment->set('VALIDATE_BY_CODE','Y');
+            $shipment->save();
+        }
         return [
             'status'=>'ok',
             'data'=>[

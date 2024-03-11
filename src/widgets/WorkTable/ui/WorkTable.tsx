@@ -33,8 +33,8 @@ interface requestType {
     },
 }
 
-export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void}) {
-    const {setOrder} = props;
+export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void, logout: ()=>void}) {
+    const {setOrder, logout} = props;
     const [error, setError] = useState<ErrorType | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,6 +44,9 @@ export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void}
         const data = new FormData(event.currentTarget);
         const res = await loadData<requestType>("data/getOrder.php", undefined, "post", data);
         if (res.status==='error') {
+            if (res.error?.code==='NotAuth') {
+
+            }
            setError(res?.error)
         }
          if (res.status === 'ok') {

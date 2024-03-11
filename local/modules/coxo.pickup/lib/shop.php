@@ -24,17 +24,11 @@ class ShopTable extends Entity\DataManager
                     'primary' => true,
                     'autocomplete' => true
                 )),
-            new Entity\StringField('TITLE', [
-                'required'=>true
-            ]),
+            new Entity\StringField('TITLE'),
             new Entity\IntegerField('CREATE_TIMESTAMP'),
-            new Entity\IntegerField('PHONE'),
-            new Entity\StringField('CITY'),
             new Entity\StringField('ADDRESS'),
-            new Entity\StringField('EMAIL'),
-            new Entity\FloatField('GPS_N'),
-            new Entity\FloatField('GPS_S'),
-            new Entity\StringField('WORK_TIME'),
+            new Entity\IntegerField('BITRIX_ID'),
+            new Entity\StringField('CODE'),
         );
     }
 }

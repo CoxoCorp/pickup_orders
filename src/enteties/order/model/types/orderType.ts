@@ -23,7 +23,7 @@ export const statusType: Record<statusVariants, {title: string, class: Overridab
     PENDING_CONFIRMATION: {title:  "обработка подтверждения со стороны Мегамаркета", class: "warning"},
     CONFIRMED: {title:  "Подтверждено магазином", class: "warning"},
     PENDING_PACKING: {title:  "Обработка сообщения о комплектации со стороны Мегамаркета", class: "warning"},
-    PACKED: {title:  "Готово к выдачи", class: "info"},
+    PACKED: {title:  "Готово к выдаче", class: "info"},
     PENDING_SHIPPING: {title:  "Обработка сообщения об отгрузке со стороны Мегамаркета", class: "warning"},
     SHIPPED: {title:  "Отгружено магазином", class: "warning"},
     PACKING_EXPIRED: {title:  "просрочка комплетации", class: "warning"},
