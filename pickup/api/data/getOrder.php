@@ -1,14 +1,15 @@
 <?php
 require "../header.php";
 $request = \Bitrix\Main\Context::getCurrent()->getRequest();
-$orderId=$request->get('orderId');
+$orderId=trim($request->get('orderId'));
 Bitrix\Main\Loader::includeModule('coxo.pickup');
 $api = new Coxo\Pickup\Api("dev");
 $data=$api->getOrder($orderId);
 $chatId=false;
 if ($data->success===1) {
     if (isset($data->data->shipments[0]->customer->phone)) {
-        $data->data->shipments[0]->customer->phone='79062302755';
+        //$data->data->shipments[0]->customer->phone='79062302755';
+        $data->data->shipments[0]->customer->phone='79622666654';
         require($_SERVER["DOCUMENT_ROOT"] ."/customClasses/TelegramUser.php");
         require($_SERVER["DOCUMENT_ROOT"] ."/customClasses/CustomUser.php");
         $phone=CustomUser::GetPhone($data->data->shipments[0]->customer->phone);

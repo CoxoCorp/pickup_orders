@@ -16,10 +16,15 @@ function sendCode($type, $phone, $telegramChatId, $dealId): array
         'DEAL_ID'=>$dealId
     ];
     $code=Messenger\Api::getCode($codeFields);
-    if ($type=='voice') {
-        $text = $code;
-    } else {
-        $text = $code . ' - Ваш код авторизации на сайте COXO.RU';
+    switch ($type) {
+        case "voice":
+            $text = $code;
+            break;
+        case "vk":
+            $text = $code . ' - ваш код подтверждения';
+            break;
+        default:
+            $text = $code." - Ваш код авторизации на сайте СОХО.RU";
     }
     $params=[
         'method'=>$type,

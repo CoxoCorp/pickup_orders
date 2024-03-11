@@ -29,11 +29,13 @@ if ($USER->IsAuthorized()) {
     $arGroups = CUser::GetUserGroup($USER->GetID());
     $arGroupAvalaible=[30];
     $result_intersect = array_intersect($arGroupAvalaible, $arGroups);
+
     if (!empty($result_intersect)) {
         $access=true;
     } else {
         $access=false;
     }
+
     if (array_key_exists('Auth', $headers)) {
         if (__IS_DEV__) {
             $access = true;
