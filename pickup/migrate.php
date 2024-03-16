@@ -12,12 +12,17 @@ Bitrix\Main\Loader::includeModule("coxo.pickup");
 //'DROP TABLE '.
 //Coxo\Loyalty\ProjectTable::getTableName().
 
+//поменять тип
+//'ALTER TABLE '.
+//Coxo\Pickup\ShipmentTable::getTableName().
+//' MODIFY COLUMN DELIVER_ID VARCHAR(255)',
 
 
 $arMigrate=[
     'ALTER TABLE '.
-    Coxo\Pickup\ShipmentTable::getTableName().
-    ' ADD ERRORS_REPORTED VARCHAR(1)',
+Coxo\Pickup\ItemTable::getTableName().
+' ADD COLUMN ITEM_INDEX INT',
+
 ];
 
 $connection = Bitrix\Main\Application::getConnection();

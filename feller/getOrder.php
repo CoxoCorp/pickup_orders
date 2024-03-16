@@ -5,3 +5,6 @@ $request = \Bitrix\Main\Context::getCurrent()->getRequest();
 $orderId=trim($request->get('orderId'));
 $api= new Coxo\Pickup\Api('prod');
 $data=$api->getOrder($orderId);
+echo '<pre>';
+print_r($data);
+echo '</pre>';

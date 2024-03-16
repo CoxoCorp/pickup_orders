@@ -31,8 +31,14 @@ class ShipmentTable extends Entity\DataManager
             new Entity\StringField('SHIPMENT_ID', [
                 'required' => true
             ]),
-            new Entity\IntegerField('CREATE_TIMESTAMP'),
+            new Entity\StringField('DELIVER_ID', [
+                'required' => true
+            ]),
             new Entity\StringField('ORDER_CODE'),
+            new Entity\IntegerField('CREATE_TIMESTAMP'),
+            new Entity\IntegerField('LAST_MODIFIED'),
+            new Entity\StringField('USER_PHONE'),
+
             new Entity\IntegerField('SHOP_CODE'),
             (new Reference(
                 'SHOP',
@@ -78,6 +84,8 @@ class ShipmentTable extends Entity\DataManager
             new Entity\BooleanField('VALIDATE_BY_CODE',array(
                 'values' => array('N', 'Y')
             )),
+            new Entity\IntegerField('USER_VALIDATE'),
+
         );
     }
 }

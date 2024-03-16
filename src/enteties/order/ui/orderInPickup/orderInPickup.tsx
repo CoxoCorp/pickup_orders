@@ -27,7 +27,7 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                 id="panel1-header"
             >
 
-                    Детали доставки № {order.shipmentId}
+                    Детали доставки № {order.deliveryId}
 
 
             </AccordionSummary>
