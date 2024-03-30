@@ -130,7 +130,7 @@ class Api {
 
     }
     public function updateShipments() {
-
+        self::getAllShipments();
 
         $last=ShipmentTable::getList(
             [

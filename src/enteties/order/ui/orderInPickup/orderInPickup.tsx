@@ -13,10 +13,12 @@ interface orderInPickupProps {
 
 export const OrderInPickup = (props: orderInPickupProps) => {
     const {order} = props;
-    let customerName:string = "";
-    if (order.customer) {
-        if (order.customer?.firstName) customerName=order.customer.firstName+" ";
-        if (order.customer?.lastName) customerName=customerName+order.customer.lastName;
+    let customerName = order.customerFullName;
+    if (!customerName) {
+        if (order.customer) {
+            if (order.customer?.firstName) customerName = order.customer.firstName + " ";
+            if (order.customer?.lastName) customerName = customerName + order.customer.lastName;
+        }
     }
     return (
 
