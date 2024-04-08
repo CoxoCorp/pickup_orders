@@ -30,8 +30,11 @@ function sendCode($type, $phone, $telegramChatId, $dealId): array
         'method'=>$type,
         'phone'=>$phone,
         'message'=>$text,
-        'telegram'=>$telegramChatId
+        'telegram'=>$telegramChatId,
+        'dealId'=>$dealId,
+        'code'=>$code,
+        'source'=>'pickup'
     ];
-    return Messenger\Api::sendMessage($params);
+    return Messenger\Api::senMessageV2($params);
 
 }
