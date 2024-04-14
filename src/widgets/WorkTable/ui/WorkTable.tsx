@@ -102,7 +102,7 @@ export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void,
                     <Typography component="h1" variant="h5">
                         Укажите номер доставки
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         {error &&
                             <Alert severity="error">
                                 {error.message}

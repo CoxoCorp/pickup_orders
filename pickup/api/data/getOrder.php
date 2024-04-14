@@ -3,7 +3,7 @@ require "../header.php";
 $request = \Bitrix\Main\Context::getCurrent()->getRequest();
 $orderId=trim($request->get('orderId'));
 Bitrix\Main\Loader::includeModule('coxo.pickup');
-$api = new Coxo\Pickup\Api("dev");
+$api = new Coxo\Pickup\Api("coxo");
 $shipment=$api->getShipment($orderId);
 if (!$shipment) {
     $api->getAllShipments();
