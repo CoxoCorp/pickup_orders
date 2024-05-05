@@ -1,14 +1,13 @@
 <?php
-require "../header_auth.php";
-global $USER;
-
+require "../header.php";
 $res=[
     'status'=>'error',
 ];
+global $USER;
 
 if ($USER->IsAuthorized()) {
     Bitrix\Main\Loader::includeModule("coxo.pickup");
-    $res=Coxo\Pickup\Api::getWorker( $USER->getId());
+    $res=Coxo\Pickup\Api::loadPossibleOrders( $USER->getId());
 }
 
 echo json_encode($res, JSON_NUMERIC_CHECK);

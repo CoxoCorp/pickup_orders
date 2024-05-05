@@ -1,1 +1,1 @@
-export type {workerType} from "./type/workerType.ts"
+export type {workerType, LinkStoreType, ModeType} from "./type/workerType.ts"

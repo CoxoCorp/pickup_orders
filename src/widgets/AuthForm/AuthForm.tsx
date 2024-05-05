@@ -36,8 +36,11 @@ export default function AuthForm(props: propsType) {
             setError(res?.error)
         }
         if (res.status === 'ok') {
-            if (res.data?.user)
-                setWorker(res.data.user);
+            if (res?.data) {
+                if (res.data?.user)
+                    setWorker(res.data.user);
+                localStorage.setItem("DevUserId", String(res.data.user.id));
+            }
         }
     };
 

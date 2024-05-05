@@ -6,11 +6,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ErrorType} from "src/shared/ui/ErrorBlock/ErrorBlock.tsx";
 import {Alert, CircularProgress} from "@mui/material";
 import {loadData} from "src/shared/lib/loadData.ts";
 import {OrderType} from "src/enteties/order";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 
 
@@ -32,16 +35,23 @@ interface requestType {
         }
     },
 }
+interface possibleOrdersRequestType {
+    orders: OrderType[]
+}
 
 export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void, logout: ()=>void}) {
     const {setOrder, logout} = props;
+    const [possibleOrders, setPossibleOrders] = useState<OrderType[] | undefined>(undefined);
+    const [orderId, setOrderId] = useState<string | undefined>(undefined);
     const [error, setError] = useState<ErrorType | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setIsLoading(true);
         setError(undefined);
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const data = {
+            orderId: orderId
+        }
         const res = await loadData<requestType>("data/getOrder.php", undefined, "post", data);
         if (res.status==='error') {
             if (res.error?.code==='NotAuth') {
@@ -86,7 +96,25 @@ export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void,
         }
          setIsLoading(false);
     };
-
+    const style = {
+        py: 0,
+        width: '100%',
+        maxWidth: 360,
+        borderRadius: 2,
+        border: '1px solid',
+        borderColor: 'divider',
+        backgroundColor: 'background.paper',
+    };
+    const loadPossibleOrders = async ()=>{
+        const res = await loadData<possibleOrdersRequestType>("/user/loadPossibleOrders.php");
+        if (res.status==='ok') {
+            console.log(res.data?.orders);
+            if (res.data?.orders) setPossibleOrders(res.data.orders);
+        }
+    }
+    useEffect(() => {
+        loadPossibleOrders().then();
+    }, []);
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
@@ -120,6 +148,8 @@ export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void,
                             label="Номер заказа"
                             name="orderId"
                             autoFocus
+                            value={orderId?orderId:""}
+                            onChange={(e)=>setOrderId(e.target.value)}
                             
                         />
                         {
@@ -139,6 +169,36 @@ export function WorkTable(props: {setOrder: (order:OrderType | undefined)=>void,
 
 
                     </Box>
+                    {possibleOrders?
+                        <>
+                        {possibleOrders.length>0 &&
+                            <>
+                                <Box sx={{mt:2, mb: 2, fontWeight: 700}}>
+                                    Или выберите из доступных:
+                                </Box>
+                                <Box sx={{mt:2, mb: 2, fontWeight: 700}}>
+                                    <List sx={style}>
+                                        {
+                                            possibleOrders.map(o=>
+                                                <ListItem
+                                                    key={o.shipmentId}
+                                                    sx={{cursor: "pointer"}}
+                                                    onClick={()=>setOrderId(o.orderCode)}
+                                                >
+                                                    <ListItemText primary={o.orderCode+" ("+o.shipmentId+")"}  />
+                                                </ListItem>
+                                            )
+                                        }
+
+                                    </List>
+
+                                </Box>
+                            </>
+                        }
+                        </>
+                        :
+                        <CircularProgress/>
+                    }
                 </Box>
             </Container>
         </ThemeProvider>
