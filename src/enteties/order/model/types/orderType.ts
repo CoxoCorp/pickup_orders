@@ -60,5 +60,6 @@ export interface OrderType {
     deliveryDateTo?: string //	Дата и время до которой клиент должен выкупить товар	string
     items?: ItemType[],
     status: statusVariants,
-    customer?: CustomerType
+    customer?: CustomerType,
+    type?: 'mega' | 'coxo'
 }

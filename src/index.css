@@ -17,17 +17,7 @@ a:hover {
     justify-content: flex-end;
     margin-bottom: 15px;
 }
-table {
-    tr {
-        td {
-            vertical-align: top;
-        }
-        td.title {
-            font-weight: bold;
-            padding-right: 1rem;
-        }
-    }
-}
+
 h2, h3 {
     text-align: center;
 }

@@ -21,7 +21,7 @@ function App() {
   const [error, setError] = useState<ErrorType | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [order, setOrder] = useState<OrderType | undefined>(undefined);
-  const setMode = (mode: ModeType) =>{
+  const setMode = (mode: ModeType | undefined) =>{
     setWorker((currentWorker: workerType | undefined)=>{
       if (currentWorker) {
         return {...currentWorker, mode: mode}
@@ -61,7 +61,14 @@ function App() {
   if (!worker) return <AuthForm setWorker={setWorker}/>
   if (!worker?.mode) return <Suspense fallback={<Loader/>}><ModeForm setMode={setMode}/></Suspense>
   if (worker.mode==='coxo' && !worker?.linkStore) return <Suspense fallback={<Loader/>}><StoreForm allStores={worker.allShops} setStore={setStore} /></Suspense>
-  if (!order) return <WorkTable setOrder={setOrder} logout={()=>setWorker(undefined)}/>
+  if (!order) return (
+      <WorkTable
+          worker={worker}
+          changeWorkerMode={()=>setMode(undefined)}
+          setOrder={setOrder}
+          logout={()=>setWorker(undefined)}
+      />
+  )
   return <CheckForm order={order} cancelFun={()=>setOrder(undefined)}/>
 }
 

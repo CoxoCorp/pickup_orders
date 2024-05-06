@@ -20,7 +20,7 @@ export const CheckForm = (props: CheckFormProps) => {
     const defaultTheme = createTheme();
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xl">
+            <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
                     sx={{

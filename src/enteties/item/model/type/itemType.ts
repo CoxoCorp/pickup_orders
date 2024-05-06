@@ -1,6 +1,7 @@
 export interface ItemType {
     finalPrice?: number,
     price?: number,
+    quantity?: number,
     goodsData?: {
         categoryName?: string,
         isDelivery?: boolean

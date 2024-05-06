@@ -1,6 +1,6 @@
 import {ErrorType} from "src/shared/ui/ErrorBlock/ErrorBlock";
 import {resType} from "src/shared/types/GlobalTypes";
-import {$apiCoxo} from "src/shared/lib/axios/coxo";
+import {$apiCoxo, $apiService} from "src/shared/lib/axios/coxo";
 import {AxiosError} from "axios";
 
 type setErrorFuncType = (error: ErrorType | undefined)=>void | undefined;
@@ -8,16 +8,19 @@ export async function loadData<T>  (
     url: string,
     setError?: setErrorFuncType,
     method: "get"| "post" = "get",
-    params:any|undefined = undefined
+    params: any|undefined = undefined,
+    api: 'service' | 'coxo' = 'service'
+
 
 ) : Promise<resType<T>> {
     try {
         let data: resType<T>;
+        const currentApi = api==="coxo"?$apiCoxo:$apiService;
         if (method === "get") {
-            const res = await $apiCoxo.get<resType<T>>(url);
+            const res = await currentApi.get<resType<T>>(url);
             data = res.data;
         } else {
-            const res = await $apiCoxo.post<resType<T>>(url, params);
+            const res = await currentApi.post<resType<T>>(url, params);
             data = res.data;
         }
         if (!data) {

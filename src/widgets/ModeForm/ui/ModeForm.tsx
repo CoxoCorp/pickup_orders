@@ -32,7 +32,6 @@ const ModeForm = (props: propsType) => {
                 mode: currentMode
             };
             const res = await loadData<requestType>("user/setMode.php", setError, "post", data);
-            console.log(res)
             if (res.status === 'error') {
                 setError(res?.error)
             }

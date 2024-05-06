@@ -28,8 +28,17 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                 aria-controls="panel1-content"
                 id="panel1-header"
             >
-
-                    Детали доставки № {order.deliveryId}
+                {
+                    order?.type==="coxo"
+                    ?
+                        <span>
+                            Заказ Coxo.ru № {order.shipmentId}
+                         </span>
+                        :
+                        <span>
+                            Детали доставки № {order.deliveryId}
+                        </span>
+                }
 
 
             </AccordionSummary>
@@ -121,6 +130,17 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                                                 </div>
                                                 <div className={cls.fieldValue}>
                                                     {normalNumber(item.finalPrice)} руб.
+                                                </div>
+                                            </div>
+                                        }
+                                        {
+                                            item.quantity &&
+                                            <div className={cls.oneInfo}>
+                                                <div className={cls.field}>
+                                                    Количество:
+                                                </div>
+                                                <div className={cls.fieldValue}>
+                                                    {normalNumber(item.quantity)} шт.
                                                 </div>
                                             </div>
                                         }
