@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React, {createContext, useState} from 'react';
 
 interface propsType {
     children: React.ReactNode;
@@ -9,16 +9,18 @@ interface CheckDoneContextType {
 }
 const init:CheckDoneContextType = {
     status: false,
+    setStatus: ()=>{}
 }
 
-export const CheckDoneContext = createContext<CheckDoneContextType>()
+export const CheckDoneContext = createContext<CheckDoneContextType>(init)
 
 export const CheckDoneProvider = (props: propsType) => {
+    const [status, setStatus] = useState<boolean>(false)
     const {children} = props;
 
     return (
-        <div>
-
-        </div>
+        <CheckDoneContext.Provider value={{status, setStatus}}>
+            {children}
+        </CheckDoneContext.Provider>
     );
 };
