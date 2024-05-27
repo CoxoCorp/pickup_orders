@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import cls from "./orderInPickup.module.scss";
 import {getCustomDate} from "src/shared/lib/getCustomDate.ts";
 import {normalNumber} from "src/shared/lib/normalNumber.ts";
+import {classNames} from "src/shared/lib/classNames/classNames.ts";
 
 interface orderInPickupProps {
     order: OrderType
@@ -57,14 +58,26 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                         </tr>
 
                     }
-                    {order.creationDate &&
-                    <tr>
+                    {
+                        order.creationDateString &&
+                        <tr>
 
-                        <td className="title">
-                            Создан:
-                        </td>
-                        <td className="value">
-                            {getCustomDate(new Date(order.creationDate))}
+                            <td className="title">
+                                Создан:
+                            </td>
+                            <td className="value">
+                                {order.creationDateString}
+                            </td>
+                        </tr>
+                    }
+                    {order.creationDate &&
+                        <tr>
+
+                            <td className="title">
+                                Создан:
+                            </td>
+                            <td className="value">
+                                {getCustomDate(new Date(order.creationDate))}
                         </td>
                     </tr>
                     }
@@ -99,7 +112,7 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                         <div className={cls.title}>Товары в заказе:</div>
                         {
                             order.items.map((item, index)=>
-                            <div className={cls.oneItem} key={item.offerId}>
+                            <div className={cls.oneItem} key={index}>
                                 <div className={cls.itemValue}>
                                     <div className={cls.itemNumber}>
                                         {index+1}
@@ -117,7 +130,7 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                                                 <div className={cls.field}>
                                                     Базовая цена:
                                                 </div>
-                                                <div className={cls.fieldValue}>
+                                                <div className={classNames(cls.fieldValue)}>
                                                     {normalNumber(item.price)} руб.
                                                 </div>
                                             </div>
@@ -149,11 +162,51 @@ export const OrderInPickup = (props: orderInPickupProps) => {
                             </div>
                             )
                         }
+
                     </div>
                 }
+                {
+                    order?.payments && order.payments.length>0 &&
+                    <div className={cls.itemsBlock}>
+                        <div className={cls.title}>Оплаты в заказе:</div>
+                        {
+                            order.payments.map((p,index)=>
+                                <div className={cls.oneItem} key={index}>
+                                    <div className={cls.itemValue}>
+                                        <div className={cls.itemNumber}>
+                                            {index + 1}
+                                        </div>
+                                        <div className={cls.info}>
+                                            <div className={cls.itemTitle}>
+                                                {p.NAME}
+                                            </div>
+                                            <div className={cls.oneInfo}>
+                                                <div className={cls.field}>
+                                                    Сумма:
+                                                </div>
+                                                <div className={cls.fieldValue}>
+                                                    {normalNumber(p.SUM)} руб.
+                                                </div>
+                                            </div>
+                                            <div className={cls.oneInfo}>
+                                                <div className={cls.field}>
+                                                    Статус:
+                                                </div>
+                                                <div
+                                                    className={classNames(cls.fieldValue, {[cls.done]: p.Paid}, [cls.payStatus])}>
+                                                    {p.Paid ? "Оплачен" : "Не оплачен"}
+                                                </div>
+                                            </div>
+                                        </div>
 
 
+                                    </div>
+                                </div>
+                            )
+                        }
 
+                    </div>
+                }
 
 
             </AccordionDetails>

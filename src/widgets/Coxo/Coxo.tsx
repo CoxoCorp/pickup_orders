@@ -55,7 +55,6 @@ const Coxo = (props: PropsType) => {
         if (res.status === 'ok') {
             if (res.data) {
                 if (res.data?.order) {
-                    console.log(res.data.order);
                     setOrder(res.data.order);
                 }
             }

@@ -2,10 +2,8 @@ import {ButtonsType} from "src/widgets/MessageBlock/model/types/buttonsType.ts";
 import {OneButton} from "src/widgets/MessageBlock/ui/OneButton/OneButton.tsx";
 import {useState} from "react";
 import {ConfirmCodeForm} from "src/widgets/ConfirmCodeForm/ConfirmCodeForm.tsx";
-import {Alert} from "@mui/material";
 import * as React from "react";
-import Button from "@mui/material/Button";
-import DoneIcon from '@mui/icons-material/Done';
+
 
 
 interface MessageBlockProps {
@@ -17,28 +15,9 @@ interface MessageBlockProps {
 
 export const MessageBlock = (props: MessageBlockProps) => {
     const {telegramChatId, phone, shipmentId, cancelFun} = props;
-    const [isDone, setIsDone] = useState<boolean>(false);
     const [doneMessage, setDoneMessage] = useState<string | undefined>(undefined);
     const buttons: ButtonsType[]=["vk", "voice", "sms"];
     if (telegramChatId) buttons.unshift("telegram");
-    if (isDone) {
-        return (
-            <>
-                <Alert severity="success">
-                    Код введен верно. Заказ можно выдать.
-                </Alert>
-                <div style={{display: "flex", justifyContent: "center", marginTop: "15px"}}>
-                <Button
-                    variant="outlined"
-                    startIcon={<DoneIcon/>}
-                    onClick={()=>{cancelFun()}}
-                >
-                    Вернуться на главную
-                </Button>
-                </div>
-            </>
-        )
-    }
     return (
             <div>
                 {
@@ -49,8 +28,6 @@ export const MessageBlock = (props: MessageBlockProps) => {
                             doneMessage={doneMessage}
                             phone={phone}
                             shipmentId={shipmentId}
-                            setCodeDone={()=>setIsDone(true)}
-
                         />
                     </>
                 }

@@ -15,6 +15,6 @@ export const $apiService=axios.create({
 })
 
 export const $apiCoxo=axios.create({
-    baseURL: __IS_DEV__?"https://www.coxo.ru/Api/":"/Api",
+    baseURL: 'https://www.coxo.ru/Api/',
     headers: headers
 })

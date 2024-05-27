@@ -46,7 +46,9 @@ export const OneButton = (props: OneButtonProps) => {
     const clickHandler = async ()=>{
         setIsWait(true);
         const data={
-            phone, telegramChatId, type, shipmentId
+            phone,
+            telegramChatId:telegramChatId?telegramChatId:0,
+            type, shipmentId
         }
 
         const res= await loadData<requestType>("code/sendCode.php", undefined, "post", data);

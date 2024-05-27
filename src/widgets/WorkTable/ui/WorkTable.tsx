@@ -25,7 +25,6 @@ interface PropsType {
 
 export function WorkTable(props: PropsType ) {
     const {setOrder, worker, changeWorkerMode } = props;
-    console.log(worker)
     const mode=worker.mode==="dbs"?"Доставка собственными силам":"Закажи и забери";
     return (
         <ThemeProvider theme={defaultTheme}>

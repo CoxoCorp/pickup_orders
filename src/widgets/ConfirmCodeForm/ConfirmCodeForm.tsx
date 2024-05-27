@@ -1,26 +1,27 @@
 import {Alert} from "@mui/material";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {ErrorType} from "src/shared/ui/ErrorBlock/ErrorBlock.tsx";
 import {loadData} from "src/shared/lib/loadData.ts";
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
+import {CheckDoneContext} from "src/app/providers/CheckDoneProvider/CheckDoneProvider.tsx";
 
 
 interface ConfirmCodeFormProps {
     doneMessage: string,
     phone: number,
     shipmentId: number,
-    setCodeDone: ()=>void
 }
 interface requestType {
 
 }
 
 export const ConfirmCodeForm = (props: ConfirmCodeFormProps) => {
-    const {doneMessage, shipmentId, phone, setCodeDone} = props;
-    const [error, setError] = useState<ErrorType | undefined>(undefined)
+    const {doneMessage, shipmentId, phone} = props;
+    const [error, setError] = useState<ErrorType | undefined>(undefined);
+    const CheckDone = useContext(CheckDoneContext);
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setError(undefined);
         event.preventDefault();
@@ -31,7 +32,7 @@ export const ConfirmCodeForm = (props: ConfirmCodeFormProps) => {
         };
         const res = await loadData<requestType>("code/verifyCode.php", setError, "post", data);
         if (res.status==='ok') {
-            setCodeDone();
+            CheckDone.setStatus(true);
         }
 
     };

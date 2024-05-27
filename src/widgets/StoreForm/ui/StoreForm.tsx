@@ -41,7 +41,6 @@ const StoreForm = (props: StoreFormProps) => {3
             if (res.status === 'ok') {
                 if (res.data?.store) {
                     setStore(allStores.find(s => s.id === Number(currentStore)));
-                    console.log(res)
                 }
             }
         }

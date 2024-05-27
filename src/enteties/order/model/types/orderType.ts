@@ -25,7 +25,7 @@ export const statusType: Record<statusVariants, {title: string, class: Overridab
     PENDING_PACKING: {title:  "Обработка сообщения о комплектации со стороны Мегамаркета", class: "warning"},
     PACKED: {title:  "Готово к выдаче", class: "info"},
     PENDING_SHIPPING: {title:  "Обработка сообщения об отгрузке со стороны Мегамаркета", class: "warning"},
-    SHIPPED: {title:  "Отгружено магазином", class: "warning"},
+    SHIPPED:  {title:  "Отгружено магазином", class: "warning"},
     PACKING_EXPIRED: {title:  "просрочка комплетации", class: "warning"},
     SHIPPING_EXPIRED: {title:  "просрочка отгрузки", class: "warning"},
     DELIVERED: {title:  "Выдан покупателю", class: "success"},
@@ -36,6 +36,14 @@ export interface CustomerType {
     lastName?: string,
     phone?: number,
     telegramChatId?: number,
+    email?: string
+}
+
+export interface PaymentType {
+    ID: number,
+    SUM: number,
+    Paid: boolean,
+    NAME: string,
 }
 
 export interface OrderType {
@@ -55,11 +63,14 @@ export interface OrderType {
     customerAddress?: string //	Адрес торговой точки	string
     shippingPoint?: string //	Идентификатор магазине по системе продавца	string
     creationDate?: string //	Дата создания отправления	string
+    creationDateString?: string
     deliveryDate?: string //	дата доставки до покупателя	dateTime/string
     deliveryDateFrom?: string // 	Дата и время с которой клиент может выкупить товар	string
     deliveryDateTo?: string //	Дата и время до которой клиент должен выкупить товар	string
     items?: ItemType[],
     status: statusVariants,
     customer?: CustomerType,
-    type?: 'mega' | 'coxo'
+    type?: 'mega' | 'coxo',
+    payments?: PaymentType[],
+    toPay?: number
 }

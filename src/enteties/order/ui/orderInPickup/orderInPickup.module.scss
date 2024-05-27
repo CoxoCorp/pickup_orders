@@ -22,6 +22,12 @@
         font-weight: bold;
       }
       .info {
+        .payStatus {
+          color: #e2292b;
+        }
+        .payStatus.done {
+          color: #2e7d32;
+        }
         flex: 1;
         .itemTitle {
           font-weight: bold;
