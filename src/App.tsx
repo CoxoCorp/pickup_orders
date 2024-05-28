@@ -25,7 +25,7 @@ function App() {
   const [error, setError] = useState<ErrorType | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [order, setOrder] = useState<OrderType | undefined>(undefined);
-  const [checkDoneStatus, setCheckDoneStatus] = useState<boolean>(true); //!!!!
+  const [checkDoneStatus, setCheckDoneStatus] = useState<boolean>(false); //!!!!
   const [orderEnd, setOrderEnd] = useState<boolean>(false);
   const [endMessage, setEndMessage] = useState<string | undefined>(undefined);
   const [checkCode, setCheckCode] = useState<string | undefined>(undefined);
@@ -64,7 +64,7 @@ function App() {
 
   }, []);
   useEffect(() => {
-    //setCheckDoneStatus(false);
+    setCheckDoneStatus(false);
     setCheckCode(undefined);
     setOrderEnd(false);
     setEndMessage(undefined);

@@ -66,7 +66,7 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
                     alignItems: "center",
                     marginTop: "15px"
                 }}>
-                    <Alert severity="success">
+                    <Alert severity="success" sx={{width: "100%"}}>
                         После нажатия кнопки <strong>подтвердить!</strong>, Покупателю будет выслан чек на покупку.
                         {
                             order?.toPay && order.toPay>0 &&
@@ -142,14 +142,17 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
             <Typography component="h1" variant="h5">
                 Товары можно выдать
             </Typography>
-            <Alert severity="success">
+            <Alert severity="success" >
                 Код введен верно. Заказ можно выдать покупателю.
             </Alert>
             {order?.toPay && order.toPay>0 &&
-                <Alert severity="error" variant="outlined" sx={{marginTop: 2}}>
+                <Alert severity="error" variant="outlined" sx={{marginTop: 2}} >
                     <AlertTitle>Внимание!</AlertTitle>
 
                     Заказ не оплачен! К оплате <strong>{normalNumber(order.toPay)} руб.</strong>
+                    <br/>
+                    Сейчас примите оплату от покупателя. (Только безнал)
+
                 </Alert>
             }
 
@@ -161,7 +164,7 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
                     startIcon={<DoneIcon/>}
                     onClick={()=>{setDoneModalOpen(true)}}
                 >
-                    Выдать заказ
+                    {order?.toPay?"Оплата принята":"Выдать заказ"}
                 </Button>
                 <Button
                     sx={{marginTop: 2}}
