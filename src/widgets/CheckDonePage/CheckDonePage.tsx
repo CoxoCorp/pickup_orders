@@ -41,6 +41,7 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
             orderEndData.sendEndMessage('Чек еще печатается. Через некоторые время чек будет напечатан и выслан покупателю по емайл или СМС. ')
 
         } else {
+            
             if (res.data?.checkCode) {
                 orderEndData.setCheckCode(res.data.checkCode);
             }
@@ -66,18 +67,23 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
                     alignItems: "center",
                     marginTop: "15px"
                 }}>
-                    <Alert severity="success" sx={{width: "100%"}}>
-                        После нажатия кнопки <strong>подтвердить!</strong>, Покупателю будет выслан чек на покупку.
-                        {
-                            order?.toPay && order.toPay>0 &&
-                            <>
-                                <br/> <br/>
-                                Убедитесь также, что Вы приняли оплату от покупателя в
-                                размере <strong>{normalNumber(order.toPay)} руб.</strong>
-                            </>
-                        }
+                    {
+                        !!((order?.toPay && order.toPay>0) || order?.type==="mega") &&
+                        <Alert severity="success" sx={{width: "100%"}}>
+                            После нажатия кнопки <strong>подтвердить</strong>, Покупателю будет выслан чек на покупку.
+                            {
+                                !!(order?.toPay && order.toPay>0) &&
+                                <>
+                                    <br/> <br/>
+                                    Убедитесь также, что Вы приняли оплату от покупателя в
+                                    размере <strong>{normalNumber(order.toPay)} руб.</strong>
+                                </>
+                            }
 
-                    </Alert>
+                        </Alert>
+                    }
+
+
 
                     <Button
                         sx={{marginTop: 2}}
@@ -145,7 +151,8 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
             <Alert severity="success" >
                 Код введен верно. Заказ можно выдать покупателю.
             </Alert>
-            {order?.toPay && order.toPay>0 &&
+            {(order?.toPay && order.toPay>0)
+                ?
                 <Alert severity="error" variant="outlined" sx={{marginTop: 2}} >
                     <AlertTitle>Внимание!</AlertTitle>
 
@@ -154,6 +161,12 @@ export const CheckDonePage = (props: CheckDonePageProps) => {
                     Сейчас примите оплату от покупателя. (Только безнал)
 
                 </Alert>
+                :
+                <Alert severity="success" variant="outlined" sx={{marginTop: 2}} >
+                    <AlertTitle>Заказ полностью оплачен</AlertTitle>
+
+                </Alert>
+
             }
 
 

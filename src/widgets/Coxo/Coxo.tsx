@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import {loadData} from "src/shared/lib/loadData";
 import {workerType} from "src/enteties/worker";
 import {normalNumber} from "src/shared/lib/normalNumber";
+import {OneCoxoOrder} from "src/widgets/Coxo/OneCoxoOrder.tsx";
 
 interface possibleOrdersRequestType {
     orders: OrderType[],
@@ -66,6 +67,7 @@ const Coxo = (props: PropsType) => {
             storeId: worker.linkStore?.bitrixId
         }
         const res = await loadData<possibleOrdersRequestType>("/catalog/getCoxoOrders.php", undefined, "post", params, "coxo");
+        console.log(res)
         if (res.status==='ok') {
             if (res.data?.orders) setPossibleOrders(res.data.orders);
         }
@@ -136,13 +138,7 @@ const Coxo = (props: PropsType) => {
                                 <List sx={style}>
                                     {
                                         possibleOrders.map(o=>
-                                            <ListItem
-                                                key={o.shipmentId}
-                                                sx={{cursor: "pointer"}}
-                                                onClick={()=>setOrderId(o.orderCode)}
-                                            >
-                                                <ListItemText primary={'Заказ № '+ normalNumber(o.shipmentId)}  />
-                                            </ListItem>
+                                            <OneCoxoOrder setOrderId={setOrderId} o={o} key={o.shipmentId}/>
                                         )
                                     }
 
